@@ -4,19 +4,29 @@
     Cursos
   </mat-toolbar>
 
-  <table mat-table [dataSource]="courses" class="mat-elevation-z8">
+  <!--async - Retorna o último valor que emitiu o Observable ou Promise-->
+  <div *ngIf="courses$ | async as courses; else loading">
+    <table mat-table [dataSource]="courses" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef> Curso </th>
-      <td mat-cell *matCellDef="let course"> {{ course.nome }} </td>
-    </ng-container>
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Curso </th>
+        <td mat-cell *matCellDef="let course"> {{ course.nome }} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="categoria">
-      <th mat-header-cell *matHeaderCellDef> Categoria </th>
-      <td mat-cell *matCellDef="let course"> {{ course.categoria }} </td>
-    </ng-container>
+      <ng-container matColumnDef="categoria">
+        <th mat-header-cell *matHeaderCellDef> Categoria </th>
+        <td mat-cell *matCellDef="let course"> {{ course.categoria }}
+          <mat-icon aria-hidden="false" aria-label="icon categoria curso">{{ course.categora | categoria }} </mat-icon>
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <ng-template #loading>
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </mat-card>
