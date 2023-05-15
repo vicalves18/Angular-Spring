@@ -4,6 +4,7 @@ import { Course } from './../model/course';
 import { Component,OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -13,12 +14,14 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 export class CoursesComponent implements OnInit{
   //nome normalmente usado para observables
   courses$ : Observable<Course[]>;
-  displayedColumns = [ 'nome', 'categoria' ];
+  displayedColumns = [ 'nome', 'categoria','actions' ];
 
   //Injeção de dependência de CoursesService
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ){
     this.courses$ = this.coursesService.listar().pipe(
       catchError(error => {
@@ -34,7 +37,12 @@ export class CoursesComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-
+  adicionar(){
+    console.log('adicionar');
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
+
+  ngOnInit(): void {}
+
+
 }

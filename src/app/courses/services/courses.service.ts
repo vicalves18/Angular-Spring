@@ -8,7 +8,7 @@ import { first, tap, delay } from 'rxjs';
 })
 export class CoursesService {
 
-  private readonly API = '/assets/courses.json';
+  private readonly API = 'api/courses';
 
   constructor(private httpClient: HttpClient) {
 
@@ -18,7 +18,7 @@ export class CoursesService {
     //pipe() debbugar - tap() executa o resultado do observable
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(), //obtem a primeira resposta e fecha conexão
-      delay(5000),
+      delay(500),
       tap(courses => console.log(courses))
     );
   }
