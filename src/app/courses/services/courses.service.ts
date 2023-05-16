@@ -23,7 +23,7 @@ export class CoursesService {
     );
   }
 
-  salvar(course : Course){
+  salvar(course : Partial<Course>){
     return this.httpClient.post<Course>(this.API, course).pipe(first());
   }
 }
