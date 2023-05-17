@@ -24,10 +24,21 @@ export class CoursesService {
   }
 
   salvar(course : Partial<Course>){
-    return this.httpClient.post<Course>(this.API, course).pipe(first());
+    if(course._id){
+      return this.editar(course);
+    }
+    return this.criar(course);
   }
 
   buscarPorId(id : string){
     return this.httpClient.get<Course>(`${this.API}/${id}`);
+  }
+
+  private criar(course : Partial<Course>){
+    return this.httpClient.post<Course>(this.API, course).pipe(first());
+  }
+
+  private editar(course : Partial<Course>){
+    return this.httpClient.put<Course>(`${this.API}/${course._id}`, course).pipe(first());
   }
 }
