@@ -7,7 +7,7 @@
   <div class="column-flex mat-elevation-z8">
     <!--async - Retorna o último valor que emitiu o Observable ou Promise-->
     <app-courses-list *ngIf="courses$ | async as courses; else loading"
-    [courses]="courses" (add)="adicionar()">
+    [courses]="courses" (add)="adicionar()" (edit)="editar($event)">
     </app-courses-list>
 
     <ng-template #loading>

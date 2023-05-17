@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesListComponent implements OnInit{
   @Input() courses : Course[] = [];
   @Output() add = new EventEmitter(false);  //Evento Saindo do componente
+  @Output() edit = new EventEmitter(false);
 
   readonly displayedColumns = [ 'nome', 'categoria','actions' ];
 
@@ -17,6 +18,10 @@ export class CoursesListComponent implements OnInit{
 
   adicionar(){
     this.add.emit(true);
+  }
+
+  editar(course : Course){
+    this.edit.emit(course);
   }
 
   ngOnInit(): void {

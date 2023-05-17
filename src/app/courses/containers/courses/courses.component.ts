@@ -42,6 +42,10 @@ export class CoursesComponent implements OnInit{
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
+  editar(course : Course){
+    this.router.navigate(['edit', course._id], { relativeTo: this.route });
+  }
+
   ngOnInit(): void {}
 
 
